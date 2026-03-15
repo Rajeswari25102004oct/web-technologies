@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+        body{
+            margin:0;
+            background-color:rgb(255, 235, 178);
+        }
+        body div{
+            margin:auto;
+            width:500px;
+            margin-top:40px;
+            background-color:rgb(251, 243, 213);
+            border:1px solid black;
+            font-size:20px;
+            border-radius:20px;
+
+        }
+        table{
+            display:flex;
+            justify-content:center;
+            padding:1em;
+            
+        }
+        table tr td{
+            padding:10px;
+            padding-left:40px;
+        }
+        span{
+            color:red;
+        }
+        button{
+            margin-left:100px;
+            margin-bottom:10px;
+            padding:0.2em 0.4em;
+            font-size:20px;
+            background-color: rgb(239, 188, 155);
+            border-radius: 10px;
+            border:1.5px solid black;
+        }
+        button:hover{
+            background-color: rgb(233, 168, 155);
+        }
+        h2{
+            text-transform: capitalize;
+            margin-left:100px;
+        }
+    </style>
+
+</head>
+<body>
+    <div>
+        <h2>registration form</h2><br>
+        <form onsubmit="return validateForm()" action="index.html" method="POST">
+            <table>
+                <tr>
+                    <td><label for="firstName">First Name:</label></td>
+                    <td><input type="text" id="firstName" name="firstName" placeholder="enter first name"><br>
+                        <span class="error" id="firstNameError"></span>
+                    </td>
+            
+                </tr>
+                <tr>
+                    <td><label for="lastName">Last Name:</label></td>
+                    <td><input type="text" id="lastName" name="lastName" placeholder="lastname" > <br><span class="error" id="lastNameError"></span></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password:</label></td>
+                    <td><input type="password" id="password" name="password" placeholder="enter password" > <br><span class="error" id="passwordError"></span></td>
+                </tr>
+                <tr>
+                    <td><label for="email">E-mail:</label></td>
+                    <td><input type="email" id="email" name="email" placeholder="enter email" ><br><span class="error" id="emailAddressError"></span></td>
+                </tr>
+                <tr>
+                    <td><label for="mobile">Mobile Number:</label></td>
+                    <td><input type="tel" id="mobile" name="mobile" placeholder="enter mobile number" > <br><span class="error" id="mobileError"></span</td>
+                </tr>
+                <tr>
+                    <td><label for="address">Address:</label></td>
+                    <td><textarea id="address" name="address" rows="4" placeholder="enter address" ></textarea><span class="error" id="AddressError"></span></td>
+                </tr>
+            </table>
+                <button type="submit">Register</button>
+        </form>
+    </div>
+    <script>
+        function validateForm() {
+            var isValid = true;
+            var firstName = document.getElementById("firstName").value;
+            var lastName = document.getElementById("lastName").value;
+            var password = document.getElementById("password").value;
+            var mobileNumber = document.getElementById("mobile").value;
+            var emailAddress = document.getElementById("email").value;
+            
+            if (!isValidName(firstName) || firstName.length < 6) {
+                document.getElementById("firstNameError").innerHTML = "Please enter alphabets with atleast 6 characters.";
+                isValid = false;
+            } else {
+                document.getElementById("firstNameError").innerHTML = "";
+            }
+
+             if (!isValidName(lastName)) {
+                document.getElementById("lastNameError").innerHTML = "Please enter only alphabets.";
+                isValid = false;
+            } else {
+                document.getElementById("lastNameError").innerHTML = "";
+            }
+            if (!isValidPassword(password)) {
+                document.getElementById("passwordError").innerHTML = "Invalid password.";
+                isValid = false;
+            } else {
+                document.getElementById("passwordError").innerHTML = "";
+            }
+
+                        if (!isValidMobileNumber(mobileNumber)) {
+                document.getElementById("mobileError").innerHTML = "Invalid mobile number.";
+                isValid = false;
+            } else {
+                document.getElementById("mobileError").innerHTML = "";
+            }
+
+            
+            if (!isValidEmail(emailAddress)) {
+                document.getElementById("emailAddressError").innerHTML = "Invalid email address.";
+                isValid = false;
+            } else {
+                document.getElementById("emailAddressError").innerHTML = "";
+            }
+
+            return isValid;
+        }
+
+        function isValidName(name) {
+            var regex = /^[A-Za-z]+$/;
+            return regex.test(name);
+        }
+
+        function isValidMobileNumber(mobileNumber) {
+                        return mobileNumber.length >= 10;
+        }
+
+        function isValidEmail(emailAddress) {
+                        var regex = /\S+@\S+\.\S+/;
+            return regex.test(emailAddress);
+        }
+        function isValidPassword(password) {
+                      let passregexp1=/[A-Z]/;
+            let passregexp2=/[0-9]/;
+            let passregexp3=/[!@#~$%^&*:|\}{_-]/;
+            return passregexp1.test(password) && passregexp2.test(password) && passregexp3.test(password);
+        }
+    </script>
+</body>
+</html>
